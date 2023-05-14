@@ -1,0 +1,42 @@
+
+{% extends 'base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="appHeader " style="background-color: transparent;box-shadow: none;">
+    <div class="left">
+        <a href="{% url 'main:index' %}" class="headerButton goBack">
+            <ion-icon name="chevron-back-outline" role="img" class="md hydrated" aria-label="chevron back outline"></ion-icon>
+        </a>
+    </div>
+    <div class="pageTitle">
+        My diary
+    </div>
+    <div class="right">
+
+        
+    </div>
+</div>
+<div id="appCapsule">
+    
+    <div class="wide-block">
+    	<div class="section-title">My diary 
+        <div class="pt-2 pb-2 text-center">
+            
+            <form method="post" action="{% url 'main:start_test' 1 %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary" style="display: block;background-color: #30C08B !important;border-color:#30C08B !important;">Analyze your entries</button>
+            </form>
+        </div>
+        </div>
+    	{% for my_diary in my_diaries %}
+	    <div style="background: rgba(48, 192, 139, 0.15);border: 1px solid #30C08B;border-radius: 15px;height: 101px; padding: 17px 12px; margin-bottom: 15px">
+	        <span style="display: block;"><a href="{% url 'main:start_test' my_diary.id %}">{{my_diary.date}}</a></span>
+	        Title:{{my_diary.title}} <br>
+	        Description: {{my_diary.text}}
+	    </div>
+	    {% endfor %}
+    </div>
+
+	
+</div>
+{% endblock %}
